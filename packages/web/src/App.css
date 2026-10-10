@@ -1,0 +1,16 @@
+.app {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+}
+
+/* Taken out of the layout flow so it doesn't pull the timer off-center. */
+.app-name {
+  position: absolute;
+  top: 1.5rem;
+  left: 0;
+  right: 0;
+  margin: 0;
+  text-align: center;
+}
