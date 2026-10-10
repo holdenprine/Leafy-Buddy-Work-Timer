@@ -1,4 +1,5 @@
 import { useEffect, useReducer } from 'react';
+import { loadSavedTimer, saveTimer } from './timerStorage';
 
 export type TimerStatus = 'idle' | 'running' | 'paused' | 'finished';
 
@@ -6,7 +7,7 @@ export interface TimerState {
   durationMs: number;
   remainingMs: number;
   status: TimerStatus;
-  /** `performance.now()` reading at which the countdown hits zero; only set while running. */
+  /** Wall-clock time the countdown hits zero; only set while running. */
   endsAt: number | null;
 }
 
@@ -49,6 +50,19 @@ export function timerReducer(state: TimerState, action: TimerAction): TimerState
   }
 }
 
+/**
+ * Resumes a saved session, catching up on time that passed while the page was closed.
+ * An idle save is discarded so a changed session length takes effect.
+ */
+export function restoreTimerState(
+  saved: TimerState | null,
+  durationMs: number,
+  now: number,
+): TimerState {
+  if (!saved || saved.status === 'idle') return createTimerState(durationMs);
+  return timerReducer(saved, { type: 'tick', now });
+}
+
 /** Formats milliseconds as mm:ss, rounding up so the display only reads 00:00 once finished. */
 export function formatTime(ms: number): string {
   const totalSeconds = Math.ceil(ms / 1000);
@@ -58,18 +72,24 @@ export function formatTime(ms: number): string {
 }
 
 export function useTimer(initialDurationMs: number) {
-  const [state, dispatch] = useReducer(timerReducer, initialDurationMs, createTimerState);
+  const [state, dispatch] = useReducer(timerReducer, initialDurationMs, (durationMs) =>
+    restoreTimerState(loadSavedTimer(), durationMs, Date.now()),
+  );
+
+  useEffect(() => {
+    saveTimer(state);
+  }, [state]);
 
   useEffect(() => {
     if (state.status !== 'running') return;
-    const id = setInterval(() => dispatch({ type: 'tick', now: performance.now() }), TICK_MS);
+    const id = setInterval(() => dispatch({ type: 'tick', now: Date.now() }), TICK_MS);
     return () => clearInterval(id);
   }, [state.status]);
 
   return {
     ...state,
-    start: () => dispatch({ type: 'start', now: performance.now() }),
-    pause: () => dispatch({ type: 'pause', now: performance.now() }),
+    start: () => dispatch({ type: 'start', now: Date.now() }),
+    pause: () => dispatch({ type: 'pause', now: Date.now() }),
     reset: () => dispatch({ type: 'reset' }),
   };
 }

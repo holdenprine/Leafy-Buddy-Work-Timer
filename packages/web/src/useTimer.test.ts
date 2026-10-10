@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { createTimerState, formatTime, timerReducer } from './useTimer';
+import { createTimerState, formatTime, restoreTimerState, timerReducer } from './useTimer';
 
 const MINUTE = 60_000;
 
@@ -42,6 +42,41 @@ describe('timerReducer', () => {
 
     state = timerReducer(state, { type: 'reset' });
     expect(state).toEqual(createTimerState(MINUTE));
+  });
+});
+
+describe('restoreTimerState', () => {
+  it('starts fresh when nothing was saved', () => {
+    expect(restoreTimerState(null, MINUTE, 0)).toEqual(createTimerState(MINUTE));
+  });
+
+  it('continues a running session, counting time spent away', () => {
+    const saved = timerReducer(createTimerState(MINUTE), { type: 'start', now: 0 });
+    expect(restoreTimerState(saved, MINUTE, 20_000)).toMatchObject({
+      status: 'running',
+      remainingMs: 40_000,
+      endsAt: 60_000,
+    });
+  });
+
+  it('finishes a running session that ended while away', () => {
+    const saved = timerReducer(createTimerState(MINUTE), { type: 'start', now: 0 });
+    expect(restoreTimerState(saved, MINUTE, 5 * MINUTE)).toMatchObject({
+      status: 'finished',
+      remainingMs: 0,
+    });
+  });
+
+  it('keeps a paused session paused with the same time left', () => {
+    let saved = timerReducer(createTimerState(MINUTE), { type: 'start', now: 0 });
+    saved = timerReducer(saved, { type: 'pause', now: 15_000 });
+    expect(restoreTimerState(saved, MINUTE, 10 * MINUTE)).toEqual(saved);
+  });
+
+  it('uses the current session length when the saved timer was idle', () => {
+    expect(restoreTimerState(createTimerState(MINUTE), 2 * MINUTE, 0)).toEqual(
+      createTimerState(2 * MINUTE),
+    );
   });
 });
 
