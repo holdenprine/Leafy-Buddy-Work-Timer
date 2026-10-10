@@ -14,16 +14,26 @@ export function Timer() {
 
       <div className="timer-controls">
         {timer.status === 'running' ? (
-          <button type="button" onClick={timer.pause}>
+          <button type="button" className="button button-primary" onClick={timer.pause}>
             Pause
           </button>
         ) : (
-          <button type="button" onClick={timer.start} disabled={timer.status === 'finished'}>
+          <button
+            type="button"
+            className="button button-primary"
+            onClick={timer.start}
+            disabled={timer.status === 'finished'}
+          >
             {timer.status === 'paused' ? 'Resume' : 'Start'}
           </button>
         )}
 
-        <button type="button" onClick={timer.reset} disabled={timer.status === 'idle'}>
+        <button
+          type="button"
+          className="button button-secondary"
+          onClick={timer.reset}
+          disabled={timer.status === 'idle'}
+        >
           Reset
         </button>
       </div>

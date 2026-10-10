@@ -1,3 +1,12 @@
+:root {
+  --color-leaf: #2f855a;
+  --color-leaf-hover: #276749;
+  --color-leaf-pressed: #22543d;
+  --color-leaf-tint: #f0fff4;
+  --color-on-leaf: #ffffff;
+  --radius-pill: 999px;
+}
+
 *,
 *::before,
 *::after {
@@ -7,4 +16,57 @@
 body {
   margin: 0;
   font-family: system-ui, sans-serif;
+}
+
+.button {
+  min-width: 7rem;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid var(--color-leaf);
+  border-radius: var(--radius-pill);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    transform 100ms ease;
+}
+
+.button:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.button:focus-visible {
+  outline: 3px solid var(--color-leaf);
+  outline-offset: 3px;
+}
+
+.button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.button-primary {
+  background-color: var(--color-leaf);
+  color: var(--color-on-leaf);
+}
+
+.button-primary:hover:not(:disabled) {
+  background-color: var(--color-leaf-hover);
+  border-color: var(--color-leaf-hover);
+}
+
+.button-primary:active:not(:disabled) {
+  background-color: var(--color-leaf-pressed);
+  border-color: var(--color-leaf-pressed);
+}
+
+.button-secondary {
+  background-color: transparent;
+  color: var(--color-leaf);
+}
+
+.button-secondary:hover:not(:disabled) {
+  background-color: var(--color-leaf-tint);
 }
