@@ -30,6 +30,11 @@ export function Timer() {
       <p className="timer-status" aria-live="polite">
         {timer.status === 'finished' && 'Session complete'}
       </p>
+
+      <div>
+        {/* button should open a modal with a confirmation prompt, then based on modal select, return user to Timer menu and clear progress toward plant growth  */}
+        <Button variant="secondary" onClick={timer.reset}>Abandon Timer</Button>
+      </div>
     </section>
   );
 }
