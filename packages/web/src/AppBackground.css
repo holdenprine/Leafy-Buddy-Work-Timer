@@ -1,0 +1,97 @@
+.app-background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: linear-gradient(160deg, #fff7ed 0%, #ffedd5 55%, #fed7aa 100%);
+}
+
+/* Soft edges come from the radial gradient rather than `filter: blur()`, which is far
+   more expensive to repaint while animating. Only `transform` is animated. */
+.app-background-blob {
+  position: absolute;
+  width: 60vmax;
+  height: 60vmax;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--blob-color) 0%, transparent 65%);
+  opacity: 0.75;
+  will-change: transform;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.app-background-blob-1 {
+  --blob-color: #fb923c;
+  top: -20%;
+  left: -15%;
+  animation-name: lava-drift-a;
+  animation-duration: 26s;
+}
+
+.app-background-blob-2 {
+  --blob-color: #f87171;
+  top: 45%;
+  left: 50%;
+  animation-name: lava-drift-b;
+  animation-duration: 32s;
+}
+
+.app-background-blob-3 {
+  --blob-color: #fbbf24;
+  top: 55%;
+  left: -20%;
+  animation-name: lava-drift-c;
+  animation-duration: 38s;
+}
+
+.app-background-blob-4 {
+  --blob-color: #fdba74;
+  top: -15%;
+  left: 55%;
+  animation-name: lava-drift-b;
+  animation-duration: 29s;
+  animation-delay: -12s;
+}
+
+@keyframes lava-drift-a {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(20vw, 30vh) scale(1.15);
+  }
+  100% {
+    transform: translate(-5vw, 55vh) scale(0.9);
+  }
+}
+
+@keyframes lava-drift-b {
+  0% {
+    transform: translate(0, 0) scale(1.1);
+  }
+  50% {
+    transform: translate(-25vw, -20vh) scale(0.9);
+  }
+  100% {
+    transform: translate(-10vw, -45vh) scale(1.2);
+  }
+}
+
+@keyframes lava-drift-c {
+  0% {
+    transform: translate(0, 0) scale(0.95);
+  }
+  50% {
+    transform: translate(30vw, -25vh) scale(1.2);
+  }
+  100% {
+    transform: translate(45vw, 10vh) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-background-blob {
+    animation: none;
+  }
+}

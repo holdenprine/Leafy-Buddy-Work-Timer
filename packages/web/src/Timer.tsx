@@ -1,3 +1,4 @@
+import { Button } from './Button';
 import './Timer.css';
 import { formatTime, useTimer } from './useTimer';
 
@@ -14,28 +15,16 @@ export function Timer() {
 
       <div className="timer-controls">
         {timer.status === 'running' ? (
-          <button type="button" className="button button-primary" onClick={timer.pause}>
-            Pause
-          </button>
+          <Button onClick={timer.pause}>Pause</Button>
         ) : (
-          <button
-            type="button"
-            className="button button-primary"
-            onClick={timer.start}
-            disabled={timer.status === 'finished'}
-          >
+          <Button onClick={timer.start} disabled={timer.status === 'finished'}>
             {timer.status === 'paused' ? 'Resume' : 'Start'}
-          </button>
+          </Button>
         )}
 
-        <button
-          type="button"
-          className="button button-secondary"
-          onClick={timer.reset}
-          disabled={timer.status === 'idle'}
-        >
+        <Button variant="secondary" onClick={timer.reset} disabled={timer.status === 'idle'}>
           Reset
-        </button>
+        </Button>
       </div>
 
       <p className="timer-status" aria-live="polite">

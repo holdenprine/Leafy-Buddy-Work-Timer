@@ -15,7 +15,9 @@
 
 .timer-controls {
   display: flex;
-  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
 }
 
 /* Reserves its line so the timer doesn't shift when the message appears. */
