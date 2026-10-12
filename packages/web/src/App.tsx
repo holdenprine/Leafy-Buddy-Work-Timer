@@ -3,8 +3,13 @@ import './App.css';
 import { AppBackground } from './AppBackground';
 import { PlantSection } from './PlantSection';
 import { Timer } from './Timer';
+import { useTimer } from './useTimer';
+
+const WORK_SESSION_MS = 25 * 60 * 1000;
 
 export function App() {
+  const timer = useTimer(WORK_SESSION_MS);
+
   return (
     <>
       <AppBackground />
@@ -13,11 +18,11 @@ export function App() {
         <p className="app-name">{APP_NAME}</p>
 
         <div className="app-pane">
-          <Timer />
+          <Timer timer={timer} />
         </div>
 
         <div className="app-pane">
-          <PlantSection />
+          <PlantSection durationMs={timer.durationMs} remainingMs={timer.remainingMs} />
         </div>
       </main>
     </>

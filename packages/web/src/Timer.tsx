@@ -1,12 +1,12 @@
 import { Button } from './Button';
 import './Timer.css';
-import { formatTime, useTimer } from './useTimer';
+import { formatTime, type TimerControls } from './useTimer';
 
-const WORK_SESSION_MS = 25 * 60 * 1000;
+interface TimerProps {
+  timer: TimerControls;
+}
 
-export function Timer() {
-  const timer = useTimer(WORK_SESSION_MS);
-
+export function Timer({ timer }: TimerProps) {
   return (
     <section className="timer" aria-label="Work timer">
       <p className="timer-display" role="timer">
