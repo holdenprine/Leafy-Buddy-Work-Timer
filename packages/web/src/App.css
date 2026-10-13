@@ -1,0 +1,29 @@
+.app {
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 4.5rem 2rem 2rem;
+}
+
+/* Taken out of the layout flow so it doesn't pull the panes off-center. */
+.app-name {
+  position: absolute;
+  top: 1.5rem;
+  left: 0;
+  right: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.app-pane {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .app {
+    grid-template-columns: 1fr;
+  }
+}

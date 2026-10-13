@@ -93,3 +93,5 @@ export function useTimer(initialDurationMs: number) {
     reset: () => dispatch({ type: 'reset' }),
   };
 }
+
+export type TimerControls = ReturnType<typeof useTimer>;

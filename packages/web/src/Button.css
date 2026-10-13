@@ -1,0 +1,45 @@
+.button {
+  min-width: 7.5rem;
+  padding: 0.875rem 1.75rem;
+  border: 3px solid var(--color-ember);
+  border-radius: var(--radius-pill);
+  font: inherit;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+.button:focus-visible {
+  outline: 3px solid var(--color-ember);
+  outline-offset: 3px;
+}
+
+.button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.button-primary {
+  background-color: var(--color-leaf);
+  color: var(--color-on-leaf);
+}
+
+.button-primary:hover:not(:disabled) {
+  background-color: var(--color-leaf-hover);
+}
+
+.button-primary:active:not(:disabled) {
+  background-color: var(--color-leaf-pressed);
+}
+
+.button-secondary {
+  background-color: transparent;
+  color: var(--color-leaf);
+}
+
+.button-secondary:hover:not(:disabled) {
+  background-color: var(--color-leaf-tint);
+}

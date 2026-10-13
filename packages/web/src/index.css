@@ -1,0 +1,27 @@
+:root {
+  --color-leaf: #2f855a;
+  --color-leaf-hover: #276749;
+  --color-leaf-pressed: #22543d;
+  --color-leaf-tint: #f0fff4;
+  --color-on-leaf: #ffffff;
+  --color-ember: #c2410c;
+  --radius-pill: 999px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+}
+
+/* Layout debugging: add `debug-layout` to <body> in index.html to outline every element.
+   Outlines don't take up space, so they don't shift the layout being inspected. */
+/* .debug-layout * {
+  outline: 1px solid red;
+  outline-offset: -1px;
+} */
