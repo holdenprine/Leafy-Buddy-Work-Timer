@@ -9,7 +9,7 @@
   max-height: 70rem; 
   min-height: 16rem;
   padding: 2rem;
-  border: 3px solid var(--color-ember);
+  border: 8px solid var(--color-ember);
   border-radius: var(--radius-pill);
   text-align: center;
 }
