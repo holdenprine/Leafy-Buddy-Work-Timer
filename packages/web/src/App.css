@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&display=swap');
+
 .app {
   min-height: 100dvh;
   display: grid;
@@ -13,7 +15,11 @@
   left: 0;
   right: 0;
   margin: 0;
-  text-align: center;
+  text-align: left;
+  padding-left: 4rem;
+  font-family: "Pirata One", system-ui;
+  font-size: 45px;
+
 }
 
 .app-pane {
