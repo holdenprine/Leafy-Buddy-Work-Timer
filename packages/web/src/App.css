@@ -22,6 +22,18 @@
 
 }
 
+.account-link {
+  position: absolute;
+  top: 1.5rem;
+  right: 0;
+  margin: 0;
+  padding-right: 4rem;
+  font-family: "Pirata One", system-ui;
+  font-size: 25px;
+  color: inherit;
+  text-decoration: none;
+}
+
 .app-pane {
   display: grid;
   place-items: center;
